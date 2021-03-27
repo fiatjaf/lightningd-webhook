@@ -19,7 +19,7 @@ func main() {
 
 	p := plugin.Plugin{
 		Name:    "webhook",
-		Version: "v3.2",
+		Version: "v3.3",
 		Options: []plugin.Option{
 			{
 				Name:        "webhook",
@@ -29,13 +29,18 @@ func main() {
 		},
 		Subscriptions: []plugin.Subscription{
 			subscription("channel_opened"),
+			subscription("channel_open_failed"),
+			subscription("channel_state_changed"),
 			subscription("connect"),
 			subscription("disconnect"),
 			subscription("invoice_payment"),
+			subscription("invoice_creation"),
 			subscription("warning"),
 			subscription("forward_event"),
 			subscription("sendpay_success"),
 			subscription("sendpay_failure"),
+			subscription("coin_movement"),
+			subscription("openchannel_peer_sigs"),
 		},
 		Dynamic: true,
 	}
