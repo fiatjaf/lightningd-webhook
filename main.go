@@ -19,7 +19,7 @@ func main() {
 
 	p := plugin.Plugin{
 		Name:    "webhook",
-		Version: "v3.3",
+		Version: "v3.4",
 		Options: []plugin.Option{
 			{
 				Name:        "webhook",
@@ -102,6 +102,7 @@ func dispatchWebhook(p *plugin.Plugin, url string, payload interface{}) {
 		p.Log("failed to send webhook to " + url + ": " + err.Error())
 		return
 	}
+	defer req.Body.Close()
 	if req.StatusCode >= 300 {
 		b, _ := ioutil.ReadAll(req.Body)
 		p.Log(
